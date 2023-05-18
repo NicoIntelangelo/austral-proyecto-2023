@@ -1,5 +1,13 @@
 .books {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.container {
+    background-color: rgb(225, 225, 225);
+}
+
+.container h1 {
+    margin: 0px;
 }
