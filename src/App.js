@@ -57,7 +57,7 @@ const App = () => {
             <h1>Books Champion App!</h1>
             <p>¡Quiero leer libros!</p>
             <NewBook onBookAdded={addBookHandler} />
-            <BooksFilter onYearChange={reciveYearBooks} />
+            <BooksFilter onYearChange={reciveYearBooks} yearSelect={year} />
             <Books books={books} yearSelect={year} />
             <TableForm />
             <SendingForm />

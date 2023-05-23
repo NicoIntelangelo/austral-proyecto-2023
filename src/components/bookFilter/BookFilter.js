@@ -1,6 +1,6 @@
 import "./BookFilter.css";
 
-const BooksFilter = ({ onYearChange }) => {
+const BooksFilter = ({ onYearChange, yearSelect }) => {
     const changeYearHandler = (event) => {
         onYearChange(event.target.value);
     };
@@ -9,7 +9,7 @@ const BooksFilter = ({ onYearChange }) => {
         <>
             <div className="Books-filter">
                 <div className="Books-filter__control">
-                    <select onChange={changeYearHandler}>
+                    <select value={yearSelect} onChange={changeYearHandler}>
                         <option value="">Seleccione un año</option>
                         <option value="2023">2023</option>
                         <option value="2022">2022</option>
