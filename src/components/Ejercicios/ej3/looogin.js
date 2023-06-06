@@ -29,7 +29,7 @@ const Login = () => {
         <div>
             <label>Nombre</label>
             <input onChange={changeNameHandler} value={name} type="text" />
-            <p>{name}</p> !!!interpolacion
+            <p>{name}</p>
             <div>
                 <button onClick={registroCorrecto}>enviar</button>
             </div>

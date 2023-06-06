@@ -6,7 +6,8 @@ import Books from "./components/books/Books";
 import BooksFilter from "./components/bookFilter/BookFilter";
 import TableForm from "./components/Ejercicios/ej1/TableForm";
 import SendingForm from "./components/Ejercicios/ej2/SendingForm";
-import Login from "./components/Ejercicios/ej3/Login";
+import EjercicioParcial from "./components/parcial/EjercicioParcial";
+import Login from "./components/Login/Login";
 
 const BOOKS = [
     {
@@ -56,12 +57,13 @@ const App = () => {
         <div className="container">
             <h1>Books Champion App!</h1>
             <p>¡Quiero leer libros!</p>
+            <Login />
             <NewBook onBookAdded={addBookHandler} />
             <BooksFilter onYearChange={reciveYearBooks} yearSelect={year} />
             <Books books={books} yearSelect={year} />
             <TableForm />
             <SendingForm />
-            <Login />
+            <EjercicioParcial />
         </div>
     );
 };
