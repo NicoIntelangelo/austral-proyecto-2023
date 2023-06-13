@@ -32,7 +32,11 @@ const Books = ({ books, yearFiltered }) => {
     return (
         <div className="books">
             {booksMapped.length === 0 ? (
+<<<<<<< HEAD
                 <p>No hay lecturas disponibles para el año {yearFiltered}</p>
+=======
+                <p>No Hay lecturas para el año {yearSelect} </p>
+>>>>>>> 65d973814655bb3bd5e62ca8544e9b5c7b65f314
             ) : (
                 booksMapped
             )}
