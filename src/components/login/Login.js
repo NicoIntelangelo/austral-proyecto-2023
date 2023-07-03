@@ -1,13 +1,17 @@
 import { useRef, useState } from "react";
 import "./Login.css";
+import { useNavigate } from "react-router";
+import React from "react";
 
-const Login = () => {
-    const [email, SetEmail] = useState("");
-    const [password, SetPassword] = useState("");
-    const [registro, setRegistro] = useState(false);
+const Login = ({ loginHandler }) => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [register, setRegister] = useState(false);
 
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
+
+    const navigate = useNavigate();
 
     const changeEmailHandler = (event) => {
         if (event.target.value === "") {
@@ -17,8 +21,9 @@ const Login = () => {
             emailRef.current.style.borderColor = "";
             emailRef.current.style.outline = "";
         }
-        SetEmail(event.target.value);
+        setEmail(event.target.value);
     };
+
     const changePasswordHandler = (event) => {
         if (event.target.value === "") {
             passwordRef.current.style.borderColor = "red";
@@ -27,23 +32,27 @@ const Login = () => {
             passwordRef.current.style.borderColor = "";
             passwordRef.current.style.outline = "";
         }
-        SetPassword(event.target.value);
+        setPassword(event.target.value);
     };
 
-    const singInHandler = () => {
-        setRegistro(true);
+    const signInHandler = () => {
+        setRegister(true);
         if (email === "") {
             emailRef.current.focus();
             emailRef.current.style.borderColor = "red";
             emailRef.current.style.outline = "none";
             return;
         }
+
         if (password === "") {
             passwordRef.current.focus();
-            passwordRef.current.style.borderColor = "red";
+            passwordRef.current.style.borderColor = "orange";
             passwordRef.current.style.outline = "none";
             return;
         }
+
+        loginHandler();
+        navigate("/home");
     };
 
     return (
@@ -56,32 +65,26 @@ const Login = () => {
                         placeholder="Email"
                         type="email"
                         ref={emailRef}
+                        value={email}
                         onChange={changeEmailHandler}
                     />
                 </div>
-                {registro === true && email === "" ? (
-                    <p>dato obligatorio</p>
-                ) : (
-                    <></>
-                )}
+                {register && email === "" && <p>Email esta vacío</p>}
                 <div className="input-container">
                     <input
                         className="input-control"
                         placeholder="Password"
                         type="password"
                         ref={passwordRef}
+                        value={password}
                         onChange={changePasswordHandler}
                     />
                 </div>
-                {registro === true && password === "" ? (
-                    <p>dato obligatorio</p>
-                ) : (
-                    <></>
-                )}
+                {register && password === "" && <p>Password está vacío</p>}
                 <button
                     className="signin-button"
                     type="button"
-                    onClick={singInHandler}
+                    onClick={signInHandler}
                 >
                     Iniciar sesión
                 </button>

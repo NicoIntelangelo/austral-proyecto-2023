@@ -8,7 +8,7 @@ import DateRead from "../dateRead/DateRead";
 
 const BookItem = ({ title, author, dateRead, pageCount }) => {
     const [bookTitle, setBookTitle] = useState(title);
-    const [bookAuthor, setBookAuthor] = useState("");
+    //const [bookAuthor, setBookAuthor] = useState("");
 
     const clickChangeTitleHandler = () => {
         console.log("clicked");

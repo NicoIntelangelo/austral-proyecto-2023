@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 
 import NewBook from "../NewBook/NewBook";
@@ -40,8 +40,65 @@ const Dashboard = () => {
     const [yearFiltered, setYearFiltered] = useState("2023");
 
     const addBookHandler = (book) => {
-        setBooks([book, ...books]);
+        const dateString = book.dateRead.toISOString().slice(0, 10);
+
+        fetch("https://mockapi.io/projects/63a44a012a73744b0072f848", {
+            method: "POST",
+            Headers: {
+                "content/type": "application/json",
+            },
+            body: JSON.stringify({
+                title: book.title,
+                author: book.author,
+                dateRead: dateString,
+                pageCount: parseInt(book.pageCount, 10),
+            })
+                .then((response) => {
+                    if (response.ok) return response.json();
+                    else {
+                        throw new Error("the response some errors");
+                    }
+                })
+                .then(() => {
+                    const newBookArray = [book, ...books];
+                    setBooks(newBookArray);
+                })
+                .catch((error) => console.log(error)),
+        });
+
+        // const newBooksData = [book, ...books];
+        // setBooks(newBooksData);
+        // localStorage.setItem("books", JSON.stringify(newBooksData));
     };
+
+    useEffect(() => {
+        const booksStoraged = JSON.parse(localStorage.getItem("books"));
+        if (booksStoraged) {
+            const booksMapped = booksStoraged.map((book) => ({
+                ...book,
+                dateRead: new Date("2023-06-13"),
+            }));
+            setBooks(booksMapped);
+        } else localStorage.setItem("books", JSON.stringify(BOOKS));
+
+        fetch(
+            "https://mockapi.io/projects/63a44a012a73744b0072f848/api/books/Books",
+            {
+                Headers: {
+                    Accept: "application/json",
+                },
+            }
+        )
+            .then((response) => response.json())
+            .then((bookData) => {
+                const booksMapped = bookData.map((book) => ({
+                    ...book,
+                    dateRead: new Date(book.dateRead),
+                }));
+                setBooks(booksMapped);
+            })
+            .catch((error) => console.log(error));
+    }, []);
 
     const handleFilterChange = (year) => {
         setYearFiltered(year);
